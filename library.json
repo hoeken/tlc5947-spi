@@ -9,8 +9,8 @@
   "authors":
   [
     {
-      "name": "Tom Broad",
-      "email": "tcbroad@gmail.com",
+      "name": "Zach Smith",
+      "email": "hoeken@gmail.com",
       "maintainer": true
     }
   ],
@@ -21,6 +21,6 @@
     }
   ],
   "frameworks": "arduino",
-  "version": "1.0.2",
-  "platforms": [ "esp8266", "atmelavr", "ststm32" ]
+  "version": "1.1",
+  "platforms": [ "esp32", "esp8266", "atmelavr", "ststm32" ]
 }

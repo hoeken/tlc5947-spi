@@ -18,34 +18,37 @@
  ****************************************************/
 //
 // Created by tombr on 24/07/2019.
+// Updated by hoeken on 10/30/2023
 //
 
 #ifndef TLC5947_SPI_H
 #define TLC5947_SPI_H
 
 #include <Arduino.h>
+#include <SPI.h>
 
-enum LedMode {
-    RGB,
-    BGR
-};
+#define TLC5947_SPI_MAX_SINGLE 30000000    ///< Max speed with multiple devices
+#define TLC5947_SPI_MAX_MULTI  15000000    ///< Max speed with multiple devices
+#define TLC5947_SPI_ORDER MSBFIRST         ///< SPI ORDER
+#define TLC5947_SPI_MODE SPI_MODE0         ///< SPI MODE
 
 class TLC5947_SPI {
 public:
-    TLC5947_SPI(uint16_t num, uint8_t pin, LedMode mode = RGB);
+    TLC5947_SPI(uint16_t num = 0, uint8_t cs = SS, SPIClass *theSPI = &SPI);
+    ~TLC5947_SPI();
 
     void begin();
-
     void setPWM(uint16_t chan, uint16_t pwm);
+    uint16_t getPWM(uint16_t chan);
     void setLED(uint16_t lednum, uint16_t r, uint16_t g, uint16_t b);
     void write();
 private:
     uint16_t *pwmbuffer;
-
     uint16_t numdrivers;
-    uint8_t pin;
+    uint32_t speed;
 
-    LedMode mode;
+    uint8_t _cs;
+    SPIClass *_spi;
 };
 
 
